@@ -15,12 +15,14 @@ public:
 	int getMinute();
 	int getSecond();
 
-	static int getNum();
+	int getNum() const;
+	static int getMNum();
 private:
 	int m_hour;
 	int m_minute;
 	int m_second;
-
+	const int num;
+	mutable int m_age;
 	static int m_nNum;
 };
 #endif

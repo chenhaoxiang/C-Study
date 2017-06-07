@@ -2,11 +2,11 @@
 #include "Time.h"
 
 using namespace std;
-CTime::CTime(){
+CTime::CTime() : num(10){
+	
 	m_hour = 0;
 	m_minute = 0;
 	m_second = 0;
-
 	m_nNum++;
 	cout << m_nNum << endl;
 }
@@ -14,13 +14,13 @@ CTime::~CTime(){
 	m_nNum--;
 	cout << m_nNum << endl;
 }
-CTime::CTime(int hour){
+CTime::CTime(int hour) : num(10){
 	this->m_hour = hour;
 	//(*this).m_hour = hour; //效果一样的
 }
 
 //复制构造函数
-CTime::CTime(CTime& time){
+CTime::CTime(CTime& time) : num(10){
 	m_hour = time.m_hour;
 	m_minute = time.m_minute;
 	m_second = time.m_second;
@@ -53,6 +53,16 @@ int CTime::m_nNum = 0;
 //初始化的时候，前面不要加static
 //如果加了，那么编译器在编译的时候，就会为m_nNum分配内存空间
 
-int CTime::getNum(){
+int CTime::getMNum(){
 	return m_nNum;
+}
+
+int CTime::getNum() const {
+	if (m_age == 0){
+		m_age++;
+	}
+	else{
+		m_age = 0;
+	}
+	return num;
 }
