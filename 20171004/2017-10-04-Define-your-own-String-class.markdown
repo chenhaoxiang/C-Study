@@ -11,7 +11,7 @@ description:  string类使用起来比较方便，本篇博客讲解定义一个
 
 string类使用起来比较方便，本篇博客讲解定义一个类似于string功能的自己的String类。
 
-<!-- more --> 
+&lt;!-- more --&gt; 
 ----------
 
 我们自己写的String类具有以下函数  
@@ -53,8 +53,8 @@ bool empty()const;        //当前字符串是否为空
 # 6.重载流插入和提取运算符
 为了方便输入和输出  
 ```cpp
-istream& operator>>(istream& input, String& str);
-ostream& operator<<(ostream& output, String& str)；
+istream& operator&gt;&gt;(istream& input, String& str);
+ostream& operator&lt;&lt;(ostream& output, String& str)；
 ```
 
 # 7.连接两个字符串
@@ -79,7 +79,7 @@ int compare(const string &s) const;//比较当前字符串和s的大小
 ```cpp
 #ifndef STRING_H//头文件卫士，避免头文件被多次编译
 #define STRING_H
-#include<iostream>  //输入输出头文件
+#include&lt;iostream&gt;  //输入输出头文件
 using namespace std; //命名空间
 class String
 {
@@ -103,8 +103,8 @@ public:
 	bool operator==(const String& str);//字符串的相等判断
 	bool compare(const String& str);//字符串的相等判断
 
-	friend istream& operator>>(istream& input, String& str); //输入操作符的重载
-	friend ostream& operator<<(ostream& output, String& str); //输出操作符的重载
+	friend istream& operator&gt;&gt;(istream& input, String& str); //输入操作符的重载
+	friend ostream& operator&lt;&lt;(ostream& output, String& str); //输出操作符的重载
 private:
 	char* m_pBuff;//保存字符串的首地址
 	int m_nRealLen;  //字符串的字符大小
@@ -135,7 +135,7 @@ String::String(const char* pStr)
 String::String(int n, char c)  //构造一个由n个一种字符串构成的字符串
 {
 	m_pBuff = new char[n + EXT_LEN];  //实际分配的内存比字符串多了EXT_LEN
-	for (int i = 0; i < n; i++)
+	for (int i = 0; i &lt; n; i++)
 	{
 		m_pBuff[i] = c;  //利用下标运算符和循环赋值
 	}
@@ -201,7 +201,7 @@ char String::operator[](int nPos)const
 
 char String::at(int nPos)const
 {
-	if (nPos >= m_nRealLen)  //如果给出的下标超出了字符串的实际长度，就抛出一个异常
+	if (nPos &gt;= m_nRealLen)  //如果给出的下标超出了字符串的实际长度，就抛出一个异常
 	{
 		//throw exception
 	} 
@@ -225,7 +225,7 @@ bool String::empty()const
 
 const String& String::operator+=(const String& str)
 {
-	if (m_nBuffSize - m_nRealLen >= str.length())  
+	if (m_nBuffSize - m_nRealLen &gt;= str.length())  
 //计算 空间大小减去字符大小 剩余的分配了的但是没有使用的空间 是否可以连接后面的字符串，
 //如果可以不用再次分配空间直接连接，就不用再分配空间了。
 	{
@@ -257,16 +257,16 @@ const String& String::operator+=(const String& str)
 
 	return *this;
 }
-istream& operator>>(istream& input, String& str)
+istream& operator&gt;&gt;(istream& input, String& str)
 {
 	std::cin.get(str.m_pBuff, str.size(), '\n');  
 	//不直接使用cin是怕cin的输入没有结束或者字符串的长度导致越界，这个是c的一个读入指定长度字符串的函数，
 	//该函数将str.size()长度的字符串读取到str.m_pBuff中，第三个字符是结束字符，即使没有达到指定长度，遇到这个字符也会结束的。
 	return input;
 }
-ostream& operator<<(ostream& output, String& str)
+ostream& operator&lt;&lt;(ostream& output, String& str)
 {
-	for (int i = 0; i < str.length(); i++)  
+	for (int i = 0; i &lt; str.length(); i++)  
 	//因为cout对字符串的输出是以\0来结束输出，我们使用的memcpy函数是不会在字符串的结尾自动加入结束符号\0，
 	//所以我们需要利用循环和它的实际长度来实现遍历输出
 	{
@@ -279,33 +279,33 @@ ostream& operator<<(ostream& output, String& str)
 ## main.cpp：测试String类的功能
 
 ```cpp
-#include<iostream>
+#include&lt;iostream&gt;
 #include"String.h"
 
 int main()
 {
 	String str("Hello String!");  //一个参数的构造函数
-	std::cout << str << std::endl;
+	std::cout &lt;&lt; str &lt;&lt; std::endl;
 
 	String str2(10, 'a');  //提供由一个字符组成的字符串
-	std::cout << str2 << std::endl;
+	std::cout &lt;&lt; str2 &lt;&lt; std::endl;
 
 	str2 = str;  //调用=运算符重载的函数
-	std::cout << str2 << std::endl;
+	std::cout &lt;&lt; str2 &lt;&lt; std::endl;
 
 	String str3 = str2;   //调用拷贝构造函数
-	std:cout << str3 << std::endl;
+	std:cout &lt;&lt; str3 &lt;&lt; std::endl;
 
-	std::cout << "size:" << str3.size() << ", lenght:" << str3.length() << std::endl;
+	std::cout &lt;&lt; "size:" &lt;&lt; str3.size() &lt;&lt; ", lenght:" &lt;&lt; str3.length() &lt;&lt; std::endl;
 
 	str3 += "abcdkdkd";   //拼接两个字符串，测试字符串的连接
-	std::cout << str3 << std::endl;
-	std::cout << "size:" << str3.size() << ", lenght:" << str3.length() << std::endl;
+	std::cout &lt;&lt; str3 &lt;&lt; std::endl;
+	std::cout &lt;&lt; "size:" &lt;&lt; str3.size() &lt;&lt; ", lenght:" &lt;&lt; str3.length() &lt;&lt; std::endl;
 
 	String str4(50, 'a');
 	str3 += str4;
-	std::cout << str3 << std::endl;
-	std::cout << "size:" << str3.size() << ", lenght:" << str3.length() << std::endl;
+	std::cout &lt;&lt; str3 &lt;&lt; std::endl;
+	std::cout &lt;&lt; "size:" &lt;&lt; str3.size() &lt;&lt; ", lenght:" &lt;&lt; str3.length() &lt;&lt; std::endl;
 
 	getchar();
 	return 0;
@@ -325,9 +325,9 @@ GITHUB源码下载地址:<strong>【<a href='https://github.com/chenhaoxiang/C-S
 </blockquote>
 
 
-本文章由<a href="http://chenhaoxiang.cn/">[谙忆]</a>编写， 所有权利保留。 
+本文章由&lt;a href="http://chenhaoxiang.cn/"&gt;[谙忆]&lt;/a&gt;编写， 所有权利保留。 
 欢迎转载，分享是进步的源泉。
-<blockquote cite='陈浩翔'>
-<p background-color='#D3D3D3'>转载请注明出处：<a href='http://chenhaoxiang.cn'><font color="green">http://chenhaoxiang.cn</font></a><br><br>
-本文源自<strong>【<a href='http://chenhaoxiang.cn' target='_blank'>人生之旅_谙忆的博客</a>】</strong></p>
-</blockquote>
+&lt;blockquote cite='陈浩翔'&gt;
+&lt;p background-color='#D3D3D3'&gt;转载请注明出处：&lt;a href='http://chenhaoxiang.cn'&gt;&lt;font color="green"&gt;http://chenhaoxiang.cn&lt;/font&gt;&lt;/a&gt;&lt;br&gt;&lt;br&gt;
+本文源自&lt;strong&gt;【&lt;a href='http://chenhaoxiang.cn' target='_blank'&gt;人生之旅_谙忆的博客&lt;/a&gt;】&lt;/strong&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
