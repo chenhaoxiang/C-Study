@@ -321,7 +321,7 @@ int main()
 
 # 源代码下载地址：
 <blockquote cite='陈浩翔'>
-GITHUB源码下载地址:<strong>【<a href='http://chenhaoxiang.cn' target='_blank'>点我进行下载</a>】</strong>
+GITHUB源码下载地址:<strong>【<a href='https://github.com/chenhaoxiang/C-Study/tree/master/20171004/code/String' target='_blank'>点我进行下载</a>】</strong>
 </blockquote>
 
 
